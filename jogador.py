@@ -3,6 +3,11 @@ from status import *
 
 class Jogador():
     
+    def Atributos(self, const, forca, destreza, intel):
+        self.const = const
+        self.forca = forca
+        self.destreza = destreza
+        self.intel = intel
     
             
     def Status(self,nome, classe, vida, mana, ataque, defesa, iniciativa):
@@ -58,10 +63,11 @@ class Jogador():
         classe = input("Digite a classe do personagem: ")
         
         print("Personagem criado com sucesso!")
-        classe  = self.ClasseConfig(classe, const, forca, destreza, intel) 
+        classe  = self.ClasseConfig(classe, const, forca, destreza, intel)  
         defesa = 1 + (destreza + const)/2
         defesa = int(defesa)
-                   
+        
+        self.Atributos(const, forca, destreza, intel)           
         self.Status(nome, classe, 5 + const, 5 + intel, 1 + forca, defesa, 1 + destreza)
         self.StatusView()
         
@@ -115,7 +121,24 @@ class Jogador():
             forca = forca - 1
             classe = "Druida"
         return classe
-        
+    
+    def SubiuDeNivel(self):
+        if self.exp >= self.expMax:
+            if self.exp > self.expMax:
+                self.exp = self.exp - self.expMax
+            else:
+                self.exp = 0
+            
+            self.nivel = self.nivel + 1
+            self.expMax = self.nivel * 10
+            self.vidaMax += self.const
+            self.vida = self.const
+            self.ataque += self.forca
+            defesa = (self.destreza + self.const)/2
+            self.defesa = int(defesa)
+            self.iniciativa += self.destreza
+            self.manaMax += self.intel
+            self.mana += self.intel
     
     
       
