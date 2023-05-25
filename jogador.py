@@ -59,7 +59,6 @@ class Jogador():
         
         print("Personagem criado com sucesso!")
         classe  = self.ClasseConfig(classe, const, forca, destreza, intel) 
-        print("configurado")
         defesa = 1 + (destreza + const)/2
         defesa = int(defesa)
                    
