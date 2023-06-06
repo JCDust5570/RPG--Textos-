@@ -1,6 +1,6 @@
+__package__ = "Classe"
 
-
-class Mago(jogador):
+class Mago():
     def __init__(self) -> None:
         pass
         

@@ -1,6 +1,7 @@
 from enum import *
 from status import *
 
+
 class Jogador():
     
     def Atributos(self, const, forca, destreza, intel):
@@ -10,9 +11,9 @@ class Jogador():
         self.intel = intel
     
             
-    def Status(self,nome, classe, vida, mana, ataque, defesa, iniciativa):
+    def Status(self,nome,vida, mana, ataque, defesa, iniciativa):
         self.nome = nome
-        self.classe = classe
+        self.classe
         self.vida = vida
         self.vidaMax = vida        
         self.mana = mana
@@ -28,7 +29,7 @@ class Jogador():
         self.condicao = "Normal"
         
     def __init__(self):
-        nome = input("Digite o nome do personagem: ")
+        nome = input("Digite o nome do personagem: \n")
         total = 0
         
         print("Aqui usaremos um sisteminha de atributos aonde você usará pontos para personalizar seu personagem")
@@ -36,39 +37,103 @@ class Jogador():
         print("Vida = 5 + Constituição")
         print("Mana = 5 + Inteligencia")
         print("Ataque = 1 + Força")
-        print("Defesa = 1 + (Destreza + Constituição)/2")
+        print("Defesa = 1 + Destreza + Constituição/2")
         print("Iniciativa = 1 + Destreza")
         
-        while total != 10:
-            print("\nVocê tem 10 pontos para distribuir entre os atributos")
-            print("Digite a quantidade de pontos que deseja colocar em cada atributo")
-            print("Constituição: ")
-            const = int(input())
-            print("Força: ")
-            forca = int(input())
-            print("Destreza: ")
-            destreza = int(input())
-            print("Inteligencia: ")
-            intel = int(input())
-            total = const + forca + destreza + intel
+        fim = False
+        total = 0
         
+        while fim == False:
+            while total != 10:
+                print("\nVocê tem 10 pontos para distribuir entre os atributos")
+                print("Digite a quantidade de pontos que deseja colocar em cada atributo")
+                print("Constituição: ")
+                const = int(input())
+                
+                while const > 10 or const < 0:
+                    print("Você não pode colocar mais pontos do que o permitido, digite novamente o valor de Constitução: ")
+                    const = int(input())
+                total = const
+                
+                
+                print("Força: ")
+                forca = int(input())
+                while forca + const > 10 or forca < 0:
+                    print("Você não pode colocar mais pontos do que o permitido, digite novamente o valor de Força: ")
+                    forca = int(input())
+                total += forca
+                
+                
+                print("Destreza: ")
+                destreza = int(input())
+                while destreza + forca + const > 10 or destreza < 0:
+                    print("Você não pode colocar mais pontos do que o permitido, digite novamente o valor de Destreza: ")
+                    destreza = int(input())
+                total += destreza
+               
+                    
+                print("Inteligencia: ")
+                intel = int(input())
+                while intel + destreza + forca + const > 10 or intel < 0:
+                    print("Você não pode colocar mais pontos do que o permitido, digite novamente o valor de Inteligência: ")
+                    intel = int(input())
+                total += intel
+                
+            print("Deseja confirmar a distribuição de pontos? (S/N)")
+            confirm = input()
+            if confirm == "S" or confirm == "s":
+                fim = True
+            else:
+                fim = False
+            
+        classe = 0
         
-        print("Escolha a classe do personagem: ")
-        print("1 - Mago +3 de Inteligencia / -1 de Constituição")
-        print("2 - Guerreiro +2 de Força / +1 Constitução / -1 de Inteligencia")
-        print("3 - Ladino +2 de Destreza / +1 de Inteligencia / -1 de Constituição")
-        print("4 - Paladino +1 de Força / +1 de Inteligência +1 de Constituição / -1 de Destreza")
-        print("5 - Bardo +2 de Inteligência / +1 de Destreza / -1 de Força")
-        print("6 - Druida +2 de Constituição / +1 de Inteligência / -1 de Força")
-        classe = input("Digite a classe do personagem: ")
+        while classe == 0 and classe != 6 and classe !=5 and classe != 4 and classe != 3 and classe != 2 and classe != 1:
+            print("Escolha a classe do personagem: ")
+            print("1 - Mago +3 de Inteligencia / -1 de Constituição")
+            print("2 - Guerreiro +2 de Força / +1 Constitução / -1 de Inteligencia")
+            print("3 - Ladino +2 de Destreza / +1 de Inteligencia / -1 de Constituição")
+            print("4 - Paladino +1 de Força / +1 de Inteligência +1 de Constituição / -1 de Destreza")
+            print("5 - Bardo +2 de Inteligência / +1 de Destreza / -1 de Força")
+            print("6 - Atirador +2 em Destreza / +1 em Inteligência / -1 em Constituição")
+            classe = input("Digite a classe do personagem: \n")
         
-        print("Personagem criado com sucesso!")
-        classe  = self.ClasseConfig(classe, const, forca, destreza, intel)  
-        defesa = 1 + (destreza + const)/2
+        # Atribuido os valores baseados na classe escolhida
+        if classe == "1":
+            intel += 3
+            const -= 1
+            self.classe = "Mago"
+        elif classe == "2":
+            forca += 2
+            const += 1
+            intel -= 1
+            self.classe = "Guerreiro"
+        elif classe == "3":
+            destreza += 2
+            intel += 1
+            const -= 1
+            self.classe = "Ladino"
+        elif classe == "4":
+            forca += 1
+            intel += 1
+            const += 1
+            destreza -= 1
+            self.classe = "Paladino"
+        elif classe == "5":
+            intel += 2
+            destreza += 1
+            forca -= 1
+            self.classe = "Bardo"
+        elif classe == "6":
+            destreza += 2
+            intel += 1
+            const -= 1
+            self.classe = "Atirador"
+        
+        defesa = 1 + (destreza + const/2)
         defesa = int(defesa)
-        
         self.Atributos(const, forca, destreza, intel)           
-        self.Status(nome, classe, 5 + const, 5 + intel, 1 + forca, defesa, 1 + destreza)
+        self.Status(nome, 5 + const, 5 + intel, 1 + forca, defesa, 1 + destreza)
         self.StatusView()
         
         
@@ -80,8 +145,8 @@ class Jogador():
     def StatusView(self):
         print("Nome: ", self.nome)
         print("Classe: ", self.classe)
-        print("Vida: ", self.vida)
-        print("Mana: ", self.mana)
+        print("Vida: ", self.vida ,"/", self.vidaMax)
+        print("Mana: ", self.mana, "/", self.manaMax)
         print("Ataque: ", self.ataque)
         print("Defesa: ", self.defesa)
         print("Iniciativa: ", self.iniciativa)
@@ -89,39 +154,7 @@ class Jogador():
         print("Nivel: ", self.nivel)
         print("Experiencia: ", self.exp, "/", self.expMax)
     
-    def ClasseConfig(self, classe, const, forca, destreza, intel):
-        if classe == 1:
-            const = const - 1
-            intel = intel + 3
-            classe = "Mago"
-        elif classe == 2:
-            forca = forca + 2
-            const = const + 1
-            intel = intel - 1
-            classe = "Guerreiro"
-        elif classe == 3:
-            destreza = destreza + 2
-            intel = intel + 1
-            const = const - 1
-            classe = "Ladino"
-        elif classe == 4:
-            forca = forca + 1
-            intel = intel + 1
-            const = const + 1
-            destreza = destreza - 1
-            classe = "Paladino"
-        elif classe == 5:
-            intel = intel + 2
-            destreza = destreza + 1
-            forca = forca - 1
-            classe = "Bardo"
-        elif classe == 6:
-            const = const + 2
-            intel = intel + 1
-            forca = forca - 1
-            classe = "Druida"
-        return classe
-    
+                
     def SubiuDeNivel(self):
         if self.exp >= self.expMax:
             if self.exp > self.expMax:

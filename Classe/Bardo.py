@@ -1,4 +1,4 @@
-
+__package__ = "Classe" 
 
 class Bardo():
     
@@ -11,6 +11,7 @@ class Bardo():
         dano = 1
         dAtaque = 4
         custoMana = 2
+        timer = 0
         passivo = True
         nivel = 1
         
@@ -20,6 +21,7 @@ class Bardo():
         dano = 1 
         dAtaque = 4
         custoMana = 2
+        timer = 0
         passivo = True
         nivel = 3  
         
@@ -29,6 +31,7 @@ class Bardo():
         dano = 1
         dAtaque = 4
         custoMana = 2
+        timer = 0
         passivo = True
         nivel = 5    
         
@@ -39,6 +42,7 @@ class Bardo():
         dano = 1
         dAtaque = 4
         custoMana = 2
+        timer = 0
         passivo = True
         nivel = 7
         
@@ -48,5 +52,6 @@ class Bardo():
         dano = 1
         dAtaque = 4
         custoMana = 20
+        timer = 0
         passivo = True
         nivel = 9

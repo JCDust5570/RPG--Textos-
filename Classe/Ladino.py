@@ -1,4 +1,4 @@
-
+__package__ = "Classe"
 
 class Ladino():
     
